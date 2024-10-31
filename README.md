@@ -31,12 +31,12 @@ To run this project locally, please follow the instructions below:
 ```cd <repository-folder>```
 ```npm install```
 3. Configure Firebase:
-* Create a new Firebase project on the Firebase console.
-* Enable Firebase Authentication, Firebase Storage, and Firestore database.
-* Obtain the Firebase configuration object and replace it in the project's .env file.
+    * Create a new Firebase project on the Firebase console.
+    * Enable Firebase Authentication, Firebase Storage, and Firestore database.
+    * Obtain the Firebase configuration object and replace it in the project's .env file.
 4. Configure Stripe API:
-* Create a Stripe account and obtain the API keys.
-* Replace the Stripe API keys in the project's .env file.
+    * Create a Stripe account and obtain the API keys.
+    * Replace the Stripe API keys in the project's .env file.
 5. Run the development server:
 ```npm start```
 6. Open your browser and navigate to http://localhost:3000.
