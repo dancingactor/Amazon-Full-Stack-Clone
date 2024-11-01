@@ -1,24 +1,18 @@
-// Import necessary Firebase functions
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import firebase from "firebase";
 
-// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-};
+    apiKey: "AIzaSyBfKWcv9ZYUJazu_w83FvtY9PR718V59H8",
+    authDomain: "clone-b74be.firebaseapp.com",
+    projectId: "clone-b74be",
+    storageBucket: "clone-b74be.appspot.com",
+    messagingSenderId: "26762841413",
+    appId: "1:26762841413:web:d227b20a6ecc89ddb6422c",
+    measurementId: "G-0X7GSET6BP"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-// Initialize Firestore and Auth
-const db = getFirestore(app);
-const auth = getAuth(app);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+const auth = firebaseApp.auth();
 
 export { db, auth };
