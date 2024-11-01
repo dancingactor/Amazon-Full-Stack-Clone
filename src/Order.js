@@ -2,7 +2,7 @@ import React from 'react';
 import './Order.css';
 import moment from "moment";
 import CheckoutProduct from "./CheckoutProduct";
-import NumberFormat from "react-number-format"; // Updated import
+import  { NumericFormat } from "react-number-format"; // Updated import
 
 function Order({ order }) {
     return (
@@ -22,7 +22,7 @@ function Order({ order }) {
                     hideButton
                 />
             ))}
-            <NumberFormat // Updated component
+            <NumericFormat // Updated component
                 renderText={(value) => (
                     <h3 className="order__total">Order Total: {value}</h3>
                 )}

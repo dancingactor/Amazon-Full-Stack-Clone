@@ -4,7 +4,8 @@ import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import NumberFormat from "react-number-format"; // Updated import
+import { NumericFormat } from "react-number-format";
+
 import { getBasketTotal } from "./reducer";
 import axios from './axios';
 import { db } from './firebase';
@@ -111,7 +112,7 @@ function Payment() {
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
               <div className='payment__priceContainer'>
-                <NumberFormat // Updated component
+                <NumericFormat // Updated component
                   renderText={(value) => (
                     <>
                       <h3>Order Total: {value}</h3>

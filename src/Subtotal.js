@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Subtotal.css";
-import NumberFormat from "react-number-format"; // Updated import
+import { NumericFormat } from "react-number-format"; // Updated import
 import { useStateValue } from './StateProvider';
 import { getBasketTotal } from './reducer';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ function Subtotal() {
   
   return (
     <div className='subtotal'>
-      <NumberFormat // Updated component
+      <NumericFormat // Updated component
         renderText={(value)=> (
             <>
                 <p>
