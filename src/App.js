@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './App.css';
 import Header from "./Header";
 import Home from "./Home";
@@ -17,7 +17,7 @@ const promise = loadStripe("pk_test_51QGJeeKKzevSXRf7IgFTp9ejrA9LDSSS7JrFuV0rSTn
                           
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(()=>{ //like if statement
     // will only run once when the app component loads
@@ -37,7 +37,7 @@ function App() {
         })
       }
     })
-  }, [])
+  }, [dispatch])
 
 
   return (
