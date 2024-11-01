@@ -4,7 +4,7 @@ import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import CurrencyFormat from "react-currency-format";
+import { NumericFormat } from "react-number-format";
 import { getBasketTotal } from "./reducer";
 import axios from './axios';
 import { db } from './firebase';
@@ -12,7 +12,6 @@ import { db } from './firebase';
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
   const navigate = useNavigate();
-
   const stripe = useStripe();
   const elements = useElements();
 
@@ -23,52 +22,43 @@ function Payment() {
   const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
-    // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
-        const response = await axios({
-            method: 'post',
-            // Stripe expects the total in a currencies subunits
-            url: `/payments/create?total=${getBasketTotal(basket) * 100}`
-        });
-        setClientSecret(response.data.clientSecret)
-    }
+      const response = await axios({
+        method: 'post',
+        url: `/payments/create?total=${getBasketTotal(basket) * 100}`
+      });
+      setClientSecret(response.data.clientSecret);
+    };
 
     getClientSecret();
-    }, [basket])
+  }, [basket]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form submission
-    // Add your Stripe payment handling logic here
+    e.preventDefault();
     setProcessing(true);
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
+    await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-          card: elements.getElement(CardElement)
-      }
+        card: elements.getElement(CardElement),
+      },
     }).then(({ paymentIntent }) => {
-      // paymentIntent = payment confirmation
-
-        db
-        .collection('users')
+      db.collection('users')
         .doc(user?.uid)
         .collection('orders')
         .doc(paymentIntent.id)
         .set({
-            basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created
-        })
+          basket: basket,
+          amount: paymentIntent.amount,
+          created: paymentIntent.created,
+        });
 
-        setSucceeded(true);
-        setError(null)
-        setProcessing(false)
+      setSucceeded(true);
+      setError(null);
+      setProcessing(false);
 
-        dispatch({
-            type: 'EMPTY_BASKET'
-        })
-        
-        navigate("/orders", { replace: true })
-    })
+      dispatch({ type: 'EMPTY_BASKET' });
+      navigate("/orders", { replace: true });
+    });
   };
 
   const handleChange = (e) => {
@@ -80,8 +70,7 @@ function Payment() {
     <div className='payment'>
       <div className='payment__container'>
         <h1>
-          Checkout (
-          <Link to='/checkout'>{basket?.length} items</Link>)
+          Checkout (<Link to='/checkout'>{basket?.length} items</Link>)
         </h1>
         <div className='payment__section'>
           <div className='payment__title'>
@@ -98,8 +87,9 @@ function Payment() {
             <h3>Review Items and Delivery</h3>
           </div>
           <div className='payment__items'>
-            {basket.map((item) => (
+            {basket?.map((item, index) => (
               <CheckoutProduct
+                key={index}
                 id={item.id}
                 title={item.title}
                 image={item.image}
@@ -117,12 +107,8 @@ function Payment() {
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
               <div className='payment__priceContainer'>
-                <CurrencyFormat
-                  renderText={(value) => (
-                    <>
-                      <h3>Order Total: {value}</h3>
-                    </>
-                  )}
+                <NumericFormat
+                  renderText={(value) => <h3>Order Total: {value}</h3>}
                   decimalScale={2}
                   value={getBasketTotal(basket)}
                   displayType={"text"}
@@ -133,8 +119,7 @@ function Payment() {
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
-                  {/* Errors */}
-                  {error && <div>{error}</div>}
+              {error && <div>{error}</div>}
             </form>
           </div>
         </div>

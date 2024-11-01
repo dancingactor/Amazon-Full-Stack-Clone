@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import './App.css';
 import Header from "./Header";
 import Home from "./Home";
@@ -13,11 +13,11 @@ import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 
-const promise = loadStripe( "pk_test_51HPvU9DFg5koCdLGJJbNo60QAU99BejacsvnKvT8xnCu1wFLCuQP3WBArscK3RvSQmSIB3N0Pbsc7TtbQiJ1vaOi00X9sIbazL")
-                          //"pk_test_51MxNoHFDiGp5yo0l5vw7toWcsxTNof5Efw48mPrzAK26idshaX5A7QpgOD2l391rPopwALFmWq3QvPFghewoDfy900LlMOmkt2");
+const promise = loadStripe("pk_test_51QGJeeKKzevSXRf7IgFTp9ejrA9LDSSS7JrFuV0rSTnPsiOCiy6E7sD9lXX6d7eCZ4fXzoBVq0045fIZYCvsnmHT00j9ctqWQi")
+                          
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(()=>{ //like if statement
     // will only run once when the app component loads
@@ -37,7 +37,7 @@ function App() {
         })
       }
     })
-  }, [])
+  }, [dispatch])
 
 
   return (

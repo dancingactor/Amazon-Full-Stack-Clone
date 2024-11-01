@@ -1,43 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { db } from "./firebase";
-import './Orders.css'
-import { useStateValue } from "./StateProvider";
-import Order from './Order'
+import React from 'react';
+import './Order.css';
+import moment from "moment";
+import CheckoutProduct from "./CheckoutProduct";
+import { NumericFormat } from "react-number-format";
 
-function Orders() {
-  const [{ basket, user }, dispatch] = useStateValue();
-  const [orders, setOrders] = useState([]);
+function Order({ order }) {
+  if (!order || !order.data) return null; // Guard against missing order data
 
-  useEffect(() => {
-    if(user) {
-        db
-        .collection('users')
-        .doc(user?.uid)
-        .collection('orders')
-        .orderBy('created', 'desc')
-        .onSnapshot(snapshot => (
-            setOrders(snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data()
-            })))
-        ))
-    } else {
-        setOrders([])
-    }
-
-  }, [user])
-
-    return (
-        <div className='orders'>
-            <h1>Your Orders</h1>
-
-            <div className='orders__order'>
-                {orders?.map(order => (
-                    <Order order={order} />
-                ))}
-            </div>
-        </div>
-    )
+  return (
+    <div className='order'>
+      <h2>Order</h2>
+      <p>{moment.unix(order.data.created).format("MMMM Do YYYY, h:mma")}</p>
+      <p className="order__id">
+        <small>{order.id}</small>
+      </p>
+      {order.data.basket?.map((item, index) => (
+        <CheckoutProduct
+          key={index} // Added key prop
+          id={item.id}
+          title={item.title}
+          image={item.image}
+          price={item.price}
+          rating={item.rating}
+          hideButton
+        />
+      ))}
+      <NumericFormat
+        renderText={(value) => (
+          <h3 className="order__total">Order Total: {value}</h3>
+        )}
+        decimalScale={2}
+        value={order.data.amount / 100}
+        displayType={"text"}
+        thousandSeparator={true}
+        prefix={"$"}
+      />
+    </div>
+  );
 }
 
-export default Orders
+export default Order;

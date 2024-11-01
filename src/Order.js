@@ -1,8 +1,8 @@
-import React from 'react'
-import './Order.css'
+import React from 'react';
+import './Order.css';
 import moment from "moment";
 import CheckoutProduct from "./CheckoutProduct";
-import CurrencyFormat from "react-currency-format";
+import  { NumericFormat } from "react-number-format"; // Updated import
 
 function Order({ order }) {
     return (
@@ -22,7 +22,7 @@ function Order({ order }) {
                     hideButton
                 />
             ))}
-            <CurrencyFormat
+            <NumericFormat // Updated component
                 renderText={(value) => (
                     <h3 className="order__total">Order Total: {value}</h3>
                 )}
@@ -36,4 +36,4 @@ function Order({ order }) {
     )
 }
 
-export default Order
+export default Order;

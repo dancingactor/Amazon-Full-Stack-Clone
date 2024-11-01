@@ -3,29 +3,17 @@ import './Product.css';
 import { useStateValue } from './StateProvider';
 
 function Product({ id, title, image, price, rating }) {
-  const [state, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue(); // Removed unused state
   const [clicked, setClicked] = useState(false);
 
   const addToBasket = () => {
-    // dispatch the items into the data layer
     dispatch({
       type: 'ADD_TO_BASKET',
-      item: {
-        id: id,
-        title: title,
-        image: image,
-        price: price,
-        rating: rating,
-      },
+      item: { id, title, image, price, rating },
     });
 
-    // Set clicked to true to trigger the animation
     setClicked(true);
-
-    // Reset clicked state after a short delay to allow the animation to complete
-    setTimeout(() => {
-      setClicked(false);
-    }, 300);
+    setTimeout(() => setClicked(false), 300);
   };
 
   return (
@@ -40,11 +28,11 @@ function Product({ id, title, image, price, rating }) {
           {Array(rating)
             .fill()
             .map((_, i) => (
-              <p key={i}>⭐</p>
+              <p key={i}>⭐</p> // Added key
             ))}
         </div>
       </div>
-      <img src={image} alt='product-image' />
+      <img src={image} alt={title} />
       <button
         className={clicked ? 'product__button clicked' : 'product__button'}
         onClick={addToBasket}

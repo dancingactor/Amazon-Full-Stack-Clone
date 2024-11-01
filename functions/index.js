@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 {/* eslint-disable max-len */}
-const stripe = require("stripe")("sk_test_51HPvU9DFg5koCdLGeOEiFvwHat4v8eMjX6SY0YCwxPBQBUPhKy1fPVhiSM5cQtgW7QBG9ydQcXnW57TDxVE2f3H000HSfmEQZF");
+const stripe = require("stripe")("sk_test_51QGJeeKKzevSXRf73PxaeQ7yQlw1QS81woxCiBww7E2Yp3IbwvoeJW1BmAxaSiJeEdXfNGz1RqjW4Sy6h4JnZQvu00lOY9NwEW");
 {/* eslint-enable max-len */}
 
 

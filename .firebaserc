@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "clone-b74be"
-  }
+    "default": "full-stack-clone-b7681",
+    "production": "full-stack-clone-b7681"
+  },
+  "targets": {},
+  "etags": {}
 }
