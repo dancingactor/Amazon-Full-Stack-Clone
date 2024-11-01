@@ -4,7 +4,7 @@ import { useStateValue } from "./StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 import { Link, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import CurrencyFormat from "react-currency-format";
+import NumberFormat from "react-number-format"; // Updated import
 import { getBasketTotal } from "./reducer";
 import axios from './axios';
 import { db } from './firebase';
@@ -23,22 +23,19 @@ function Payment() {
   const [clientSecret, setClientSecret] = useState(true);
 
   useEffect(() => {
-    // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
         const response = await axios({
             method: 'post',
-            // Stripe expects the total in a currencies subunits
             url: `/payments/create?total=${getBasketTotal(basket) * 100}`
         });
         setClientSecret(response.data.clientSecret)
     }
 
     getClientSecret();
-    }, [basket])
+  }, [basket])
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form submission
-    // Add your Stripe payment handling logic here
+    e.preventDefault();
     setProcessing(true);
 
     const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -46,8 +43,6 @@ function Payment() {
           card: elements.getElement(CardElement)
       }
     }).then(({ paymentIntent }) => {
-      // paymentIntent = payment confirmation
-
         db
         .collection('users')
         .doc(user?.uid)
@@ -80,8 +75,7 @@ function Payment() {
     <div className='payment'>
       <div className='payment__container'>
         <h1>
-          Checkout (
-          <Link to='/checkout'>{basket?.length} items</Link>)
+          Checkout (<Link to='/checkout'>{basket?.length} items</Link>)
         </h1>
         <div className='payment__section'>
           <div className='payment__title'>
@@ -117,7 +111,7 @@ function Payment() {
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
               <div className='payment__priceContainer'>
-                <CurrencyFormat
+                <NumberFormat // Updated component
                   renderText={(value) => (
                     <>
                       <h3>Order Total: {value}</h3>
@@ -133,8 +127,7 @@ function Payment() {
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
-                  {/* Errors */}
-                  {error && <div>{error}</div>}
+              {error && <div>{error}</div>}
             </form>
           </div>
         </div>
