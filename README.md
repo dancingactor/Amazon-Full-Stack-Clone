@@ -1,7 +1,11 @@
 # Full-Stack Amazon Clone
 
 This project is a full-stack Amazon clone developed using **React.js**, **Express.js**, **Firebase**, and **Stripe API**. It offers features such as checkout, payment integration, user authentication, and real-time database functionality. The clone is deployed on Firebase Hosting for easy access and testing. 
+## Live Demo
+⮕[https://full-stack-clone-b7681.web.app/](https://full-stack-clone-b7681.web.app/)
 
+![demo2](./images/demo2.png)
+![demo1](./images/demo1.png)
 ### Getting Started
 
 To set up a testing account:
