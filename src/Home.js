@@ -13,7 +13,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/71d7M8lOf9L._SX3000_.jpg"
+                    src="/banner2.png"
                     alt="banner1"
                 />
             </div>
@@ -34,7 +34,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/51umpPrjhKL._SX3000_.jpg"
+                    src="/banner3.png"
                     alt="banner4"
                 />
             </div>
