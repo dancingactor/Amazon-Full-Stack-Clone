@@ -60,9 +60,9 @@ function Home() {
         <div className='home__row'>
             <Product 
                 id = '28371624'
-                title='THERMOS FUNTAINER 12 Ounce Stainless Steel Vacuum Insulated Kids Straw Bottle, Blue/Green' 
-                price={13.25} 
-                image="https://m.media-amazon.com/images/I/61wS5OECK9L._AC_SY879_.jpg"
+                title='WHOLE FOODS MARKET 4 Star Chocolate Mousse Cake 3 inch' 
+                price={29.99} 
+                image="https://m.media-amazon.com/images/I/61hnPoo+rKL._SX679_.jpg"
                 rating = {4}
             />
             <Product 
