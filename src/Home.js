@@ -19,7 +19,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/31-x+CdqQKL._SX1500_.jpg"
+                    src="https://m.media-amazon.com/images/I/71CtV-IknvL._SX3000_.jpg"
                     alt="banner2"
                 />
             </div>
