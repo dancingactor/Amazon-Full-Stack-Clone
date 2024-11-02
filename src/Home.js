@@ -3,6 +3,7 @@ import "./Home.css"
 import Product from './Product'
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import banner1 from '../src/images/banner1.png';
 
 function Home() {
   return (
@@ -26,7 +27,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="/images/banner1.png"
+                    src={banner1}
                     alt="banner3"
                 />
             </div>
