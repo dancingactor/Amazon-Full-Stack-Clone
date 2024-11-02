@@ -12,7 +12,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/71eJ6-zjErL._SX3000_.jpg"
+                    src="https://m.media-amazon.com/images/I/71d7M8lOf9L._SX3000_.jpg"
                     alt="banner1"
                 />
             </div>
@@ -26,14 +26,14 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/71JBER9pf2L._SX3000_.jpg"
+                    src="https://m.media-amazon.com/images/I/61IFORZo6lL._SX3000_.jpg"
                     alt="banner3"
                 />
             </div>
             <div>
                 <img 
                     className="home__image"
-                    src="https://m.media-amazon.com/images/I/61ZxL5rpLTL._SX3000_.jpg"
+                    src="https://m.media-amazon.com/images/I/51umpPrjhKL._SX3000_.jpg"
                     alt="banner4"
                 />
             </div>
