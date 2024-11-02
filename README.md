@@ -6,6 +6,7 @@ This project is a full-stack Amazon clone developed using **React.js**, **Expres
 
 ![demo1](./images/demo1.png)
 ![demo2](./images/demo2.png)
+![demo3](./images/demo3.png)
 ### Getting Started
 
 To set up a testing account:
