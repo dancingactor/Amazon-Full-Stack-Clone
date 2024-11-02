@@ -13,7 +13,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="/banner2.png"
+                    src="/banner2.jpg"
                     alt="banner1"
                 />
             </div>
@@ -34,7 +34,7 @@ function Home() {
             <div>
                 <img 
                     className="home__image"
-                    src="/banner3.png"
+                    src="/banner3.jpg"
                     alt="banner4"
                 />
             </div>
