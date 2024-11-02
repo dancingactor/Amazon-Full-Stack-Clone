@@ -4,8 +4,8 @@ This project is a full-stack Amazon clone developed using **React.js**, **Expres
 ## Live Demo
 ⮕[https://full-stack-clone-b7681.web.app/](https://full-stack-clone-b7681.web.app/)
 
-![demo1](./images/demo2.png)
-![demo2](./images/demo1.png)
+![demo1](./images/demo1.png)
+![demo2](./images/demo2.png)
 ### Getting Started
 
 To set up a testing account:
