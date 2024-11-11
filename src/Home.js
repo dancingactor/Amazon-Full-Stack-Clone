@@ -51,7 +51,7 @@ function Home() {
             />
             <Product 
                 id = '39513742'
-                title='COSRX Snail Mucin 9' 
+                title='COSRX Snail Mucin 96% Power Repairing Essence 3.38 fl.oz, 100ml, Hydrating Serum for Face with Snail Secretion Filtrate for Dull and Damaged Skin' 
                 price={13.26} 
                 image="https://m.media-amazon.com/images/I/51IF5kpotSL._SX466_.jpg"
                 rating = {4}
