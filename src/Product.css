@@ -14,10 +14,14 @@
 
 .product__info {
   width: 100%; /* Ensure full width */
-  height: auto; /* Adjust height to content */
+  height: 100px;
   margin-bottom: 15px;
   text-align: left;
+  display: flex;          /* Added */
+  flex-direction: column; /* Added */
+  justify-content: flex-start; /* Align content to the top */
 }
+
 
 .product__price {
   margin-top: 5px;
