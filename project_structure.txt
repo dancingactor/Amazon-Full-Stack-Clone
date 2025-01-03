@@ -1,0 +1,76 @@
+C:.
+│ .env
+│ .firebaserc
+│ .gitignore
+│ firebase.json
+│ package-lock.json
+│ package.json
+│ README.md
+│
+├─.firebase
+│  hosting.YnVpbGQ.cache
+│
+├─.github
+│ └─workflows
+│     firebase-hosting-merge.yml
+│     firebase-hosting-pull-request.yml
+│
+├─build
+│  index.html
+│
+├─functions
+│  .eslintrc.js
+│  .gitignore
+│  index.js
+│  package-lock.json
+│  package.json
+│  ui-debug.log
+│
+├─images
+│  demo1.png
+│  demo2.png
+│  demo3.png
+│
+├─public
+│  banner1.jpg
+│  banner2.jpg
+│  banner3.jpg
+│  favicon.ico
+│  index.html
+│  logo192.png
+│  logo512.png
+│  manifest.json
+│  robots.txt
+│
+└─src
+   App.css
+   App.js
+   axios.js
+   Checkout.css
+   Checkout.js
+   CheckoutProduct.css
+   CheckoutProduct.js
+   firebase.js
+   Footer.css
+   Footer.js
+   Header.css
+   Header.js
+   Home.css
+   Home.js
+   index.css
+   index.js
+   Login.css
+   Login.js
+   Order.css
+   Order.js
+   Orders.css
+   Orders.js
+   Payment.css
+   Payment.js
+   Product.css
+   Product.js
+   reducer.js
+   reportWebVitals.js
+   StateProvider.js
+   Subtotal.css
+   Subtotal.js
