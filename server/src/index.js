@@ -1,10 +1,8 @@
 require('dotenv').config(); // loads environment variable from server/.env
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
 
 const app = express();
-const prisma = new PrismaClient();
 
 app.use(cors()); // enable Cross-Origin Resource Sharing
 app.use(express.json());
