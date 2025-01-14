@@ -11,6 +11,7 @@ export const initialState = {
     console.log(action);
     switch (action.type) {
       case 'ADD_TO_BASKET':
+        console.log(state.basket)
         return {
           ...state,
           basket: [...state.basket, action.item],
