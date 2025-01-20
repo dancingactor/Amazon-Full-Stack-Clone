@@ -56,6 +56,7 @@ function Home() {
                 image="https://m.media-amazon.com/images/I/51IF5kpotSL._SX466_.jpg"
                 rating = {4}
             />
+            
         </div>
 
         <div className='home__row'>
