@@ -21,9 +21,13 @@ const promise = loadStripe("pk_test_51QGJeeKKzevSXRf7IgFTp9ejrA9LDSSS7JrFuV0rSTn
 function App() {
   const [, dispatch] = useStateValue();
 
-  useEffect(()=>{ //like if statement
-    // will only run once when the app component loads
+  useEffect(()=>{// useEffect will only run once when the app component loads
+    
+    // Set up a listener using Firebase's onAuthStateChanged method.
     auth.onAuthStateChanged(authUser=>{
+      // This callback is executed whenever the authentication state changes:
+      // - When a user logs in, authUser will be an object containing their info.
+      // - When a user logs out, authUser will be null.
       console.log('The User is >>>', authUser)
       if (authUser){
         // the user just logged in 
