@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.send('Hello from Express + PostgreSQL + Prisma server!');
 });
 
-// Auth routes (we'll create these shortly)
+// Auth routes
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
