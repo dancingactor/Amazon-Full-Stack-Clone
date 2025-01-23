@@ -1,34 +1,79 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "./firebase";
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signIn = (e) => {
-    e.preventDefault(); // no refreshing
-    // firebase signin
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
-        navigate("/"); // if successful
-      })
-      .catch((error) => alert(error.message));
+  // Function to handle login using the Express backend with fetch
+  const signIn = async (e) => {
+    e.preventDefault(); // Prevent form refresh
+    try {
+      // Send a POST request to /auth/login
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      // Check if the response was successful
+      if (!response.ok) {
+        // Extract error message from the response
+        const errorData = await response.json();
+        throw new Error(errorData.msg || "Login failed. Please try again.");
+      }
+
+      // Extract data from the response
+      const data = await response.json();
+      const { token } = data;
+
+      // Store the JWT token in localStorage for later use
+      localStorage.setItem("token", token);
+
+      // Redirect to the home page on successful login
+      navigate("/");
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert(error.message);
+    }
   };
 
-  const register = (e) => {
-    e.preventDefault();
-    // firebase resigter
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
-          navigate("/");
-        }
-      })
-      .catch((error) => alert(error.message));
+  // Function to handle registration using the Express backend with fetch
+  const register = async (e) => {
+    e.preventDefault(); // Prevent form refresh
+    try {
+      // Send a POST request to /auth/register
+      const response = await fetch("http://localhost:5000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      // Check if the response was successful
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.msg || "Registration failed. Please try again.");
+      }
+
+      // Extract data from the response
+      const data = await response.json();
+      const { token, user } = data;
+
+      // Store the JWT token in localStorage
+      localStorage.setItem("token", token);
+
+      // Redirect to the home page after successful registration
+      navigate("/");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert(error.message);
+    }
   };
 
   return (
@@ -38,7 +83,7 @@ function Login() {
           className="login__logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/905px-Amazon_logo.svg.png"
           alt="login-logo"
-        ></img>
+        />
       </Link>
 
       <div className="login__container">
@@ -49,14 +94,14 @@ function Login() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          ></input>
+          />
 
           <h5>Password</h5>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          ></input>
+          />
 
           <button
             type="submit"
@@ -68,7 +113,7 @@ function Login() {
         </form>
         <p>
           By signing-in you agree to AMAZON FAKS CLONE's Conditions of Use &
-          Sales. Please see our Privacy Notice, our Cookies Notice and out
+          Sales. Please see our Privacy Notice, our Cookies Notice, and our
           Interest-Based Ads Notice.
         </p>
         <button onClick={register} className="login__registerButton">
@@ -80,3 +125,4 @@ function Login() {
 }
 
 export default Login;
+
