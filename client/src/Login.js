@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [, dispatch] = useStateValue();
 
   // Function to handle login using the Express backend with fetch
   const signIn = async (e) => {
@@ -29,12 +31,15 @@ function Login() {
 
       // Extract data from the response
       const data = await response.json();
-      const { token } = data;
+      const { token, user } = data;
 
       // Store the JWT token in localStorage for later use
       localStorage.setItem("token", token);
-
-      // Redirect to the home page on successful login
+      
+      dispatch({
+        type: "SET_USER",
+        user: user
+      })
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
@@ -68,6 +73,11 @@ function Login() {
       // Store the JWT token in localStorage
       localStorage.setItem("token", token);
 
+      dispatch({
+        type: "SET_USER",
+        user: user
+      })
+
       // Redirect to the home page after successful registration
       navigate("/");
     } catch (error) {
@@ -94,6 +104,7 @@ function Login() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <h5>Password</h5>
@@ -101,6 +112,7 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           <button

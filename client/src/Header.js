@@ -4,16 +4,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
-import { auth } from "./firebase";
 
 function Header() {
-  const [{ basket, user }] = useStateValue(); // Removed `dispatch` since it's not used
+  const [ { basket, user }, dispatch ] = useStateValue();
 
   const handleAuthentication = () => {
     if (user) {
-      auth.signOut();
-    } else {
-      // Handle Sign In
+      localStorage.removeItem("token");
+      dispatch({
+        type: "SET_USER",
+        user: null
+      })
     }
   };
 
