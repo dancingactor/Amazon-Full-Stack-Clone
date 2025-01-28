@@ -4,41 +4,45 @@ const prisma = new PrismaClient();
 async function main () {
     const products = [
         {
-          title: "Wireless Mouse",
-          image: "https://example.com/images/wireless-mouse.jpg",
-          price: 25.99,
-          rating: 4,
+            id: 12321341,
+            title: "Apple AirTag 4 Pack",
+            price: 89.99,
+            image: "https://m.media-amazon.com/images/I/71gY9E+cTaS._AC_SX679_.jpg",
+            rating: 5
         },
         {
-          title: "Mechanical Keyboard",
-          image: "https://example.com/images/mechanical-keyboard.jpg",
-          price: 89.99,
-          rating: 5,
+            id: 39513742,
+            title: "COSRX Snail Mucin 96% Power Repairing Essence 3.38 fl.oz, 100ml, Hydrating Serum for Face with Snail Secretion Filtrate for Dull and Damaged Skin",
+            price: 13.26,
+            image: "https://m.media-amazon.com/images/I/51IF5kpotSL._SX466_.jpg",
+            rating: 4
         },
         {
-          title: "HD Monitor",
-          image: "https://example.com/images/hd-monitor.jpg",
-          price: 199.99,
-          rating: 4,
+            id: 28371624,
+            title: "WHOLE FOODS MARKET 4 Star Chocolate Mousse Cake 3 inch",
+            price: 29.99,
+            image: "https://m.media-amazon.com/images/I/61hnPoo+rKL._SX679_.jpg",
+            rating: 4
         },
         {
-          title: "USB-C Hub",
-          image: "https://example.com/images/usb-c-hub.jpg",
-          price: 45.50,
-          rating: 4,
+            id: 55938442,
+            title: "Certified Refurbished Ring Stick Up Cam Battery HD security camera with custom privacy controls, Simple setup, Works with Alexa",
+            price: 54.99,
+            image: "https://m.media-amazon.com/images/I/41Hc4IGGzdL._SY450_.jpg",
+            rating: 4
         },
         {
-          title: "Gaming Chair",
-          image: "https://example.com/images/gaming-chair.jpg",
-          price: 149.99,
-          rating: 5,
-        },
-        // Add more products as needed
+            id: 67849302,
+            title: "Y2K Crochet Crop Top See Through Hollow Out Sweater Pullover Long Sleeve Knit Color Block Casual Streetwear",
+            price: 23.99,
+            image: "https://m.media-amazon.com/images/I/71YPc4GGxrL._AC_UX569_.jpg",
+            rating: 3
+        }
     ];
     
     for (const product of products) {
         await prisma.product.upsert({
-            where: { title: product.title},
+            where: { id: product.id },
             update: {},
             create: product
         });
@@ -47,11 +51,4 @@ async function main () {
     console.log("Database has been seeded. 🌱");
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main();
