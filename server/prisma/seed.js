@@ -37,7 +37,7 @@ async function main () {
     ];
     
     for (const product of products) {
-        prisma.product.upsert({
+        await prisma.product.upsert({
             where: { title: product.title},
             update: {},
             create: product
@@ -47,4 +47,11 @@ async function main () {
     console.log("Database has been seeded. 🌱");
 }
 
-main();
+main()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

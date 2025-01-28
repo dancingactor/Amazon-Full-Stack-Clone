@@ -38,7 +38,7 @@ model BasketItem {
 
 model Product {
  id         Int      @id @default(autoincrement())
- title      String
+ title      String   @unique
  image      String
  price      Float
  rating     Int
