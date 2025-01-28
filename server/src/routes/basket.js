@@ -33,6 +33,15 @@ router.get("/", authenticateToken, async (req, res) => {
         res.json(basket);
     } catch (error) {
         console.error("Error fetching basket", error);
-        res.status(500).json(error: "Server error");
+        res.status(500).json({ error: "Server error" });
     }
 });
+
+// add an item to the basket
+router.post("/", authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { productId, quantity } = req.body;
+        
+    }
+})
