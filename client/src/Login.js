@@ -20,7 +20,7 @@ function Login() {
       })
 
       if (response.ok) {
-        basket = await response.json();
+        const basket = await response.json();
         dispatch({
           type: "SET_BASKET",
           basket: basket.items

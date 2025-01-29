@@ -41,17 +41,9 @@ router.get("/", authenticateToken, async (req, res) => {
 router.post("/", authenticateToken, async (req, res) => {
     try {
         const userId = req.user.id;
-        const { productId, quantity } = req.body;
-        
-        const product = await prisma.product.findUnique({ where: { id: productId }});
-        if (!product) {
-            return res.status(404).json({ error: "Product not found"});
-        }
+        const { productId } = req.body;
 
         const basket = await prisma.basket.findUnique({ where: { userId } });
-        if (!basket) {
-            await prisma.basket.create({ data: { userId } });
-        }
 
         let basketItem = await prisma.basketItem.findUnique({
             where: { baksetId: basket.id, productId }
@@ -60,11 +52,11 @@ router.post("/", authenticateToken, async (req, res) => {
         if (basketItem) {
             basketItem = await prisma.basketItem.update({
                 where: { id: basketItem.id },
-                data: { quantity: basketItem.quantity + quantity }
+                data: { quantity: { increment: 1 } }
             });
         } else {
             basketItem = await prisma.basketItem.create({
-                data: { basketId: basket.id, productId, quantity }
+                data: { basketId: basket.id, productId, quantity: 1 }
             })
         }
 
@@ -75,10 +67,10 @@ router.post("/", authenticateToken, async (req, res) => {
     }
 });
 
-router.delete("/:productId", authenticateToken, async (req, res) => {
+router.delete("/", authenticateToken, async (req, res) => {
     try {
         const userId = req.user.id;
-        const { productId } = req.params;
+        const { productId } = req.body;
         
         const basketItem = await prisma.basketItem.findUnique({ 
             where: {
