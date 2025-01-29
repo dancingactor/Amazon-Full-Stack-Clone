@@ -74,3 +74,42 @@ router.post("/", authenticateToken, async (req, res) => {
         res.status(500).json({ error: "Server error"});
     }
 });
+
+router.delete("/:productId", authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { productId } = req.params;
+        
+        const basketItem = await prisma.basketItem.findUnique({ 
+            where: {
+                productId: parseInt(productId),
+                basket: { userId } 
+            },
+        });
+
+        if (!basketItem) {
+            return res.json(404).json({ error: "Basket Item not found" });
+        }
+        
+        const updatedItem = await prisma.basketItem.update({
+            where: {
+                productId: parseInt(productId),
+                basket: { userId } 
+            },
+            data: {
+                quantity: { decrement: 1 }
+            }
+        })
+        
+        if (updatedItem.quantity <= 0) {
+            await prisma.basketItem.delete({ where: { id: updatedItem.id } });
+        };
+        
+        res.json(updatedItem);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+module.exports = router;
