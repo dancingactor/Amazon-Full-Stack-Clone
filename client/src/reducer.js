@@ -39,7 +39,13 @@ export const initialState = {
           ...state,
           basket: newBasket,
         };
-  
+      
+      case 'SET_BASKET':
+        return {
+          ...state,
+          basket: action.basket,
+        }
+        
       case 'SET_USER':
         return {
           ...state,
