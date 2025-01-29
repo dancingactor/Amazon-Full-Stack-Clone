@@ -9,6 +9,30 @@ function Login() {
   const [password, setPassword] = useState("");
   const [, dispatch] = useStateValue();
 
+  const fetchBasket = async (token) => {
+    try {
+      const response = await fetch("http://localhost:5000/basket", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+
+      if (response.ok) {
+        basket = await response.json();
+        dispatch({
+          type: "SET_BASKET",
+          basket: basket.items
+        })
+      } else {
+        console.error("Failed to fetch basket")
+      }
+    } catch (error) {
+      console.error("Error fetching basket", error);
+    }
+  }
+
   // Function to handle login using the Express backend with fetch
   const signIn = async (e) => {
     e.preventDefault(); // Prevent form refresh
@@ -40,6 +64,7 @@ function Login() {
         type: "SET_USER",
         user: user
       })
+      await fetchBasket(token);
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
@@ -78,6 +103,7 @@ function Login() {
         user: user
       })
 
+      await fetchBasket(token);
       // Redirect to the home page after successful registration
       navigate("/");
     } catch (error) {

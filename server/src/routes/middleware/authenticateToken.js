@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const authenticateToken = async (req, res, next) => {
-    const authHeader = req[headers]['authorization'];
+    const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
@@ -29,4 +29,4 @@ const authenticateToken = async (req, res, next) => {
     }
 }
 
-export default authenticateToken;
+module.exports = authenticateToken;
