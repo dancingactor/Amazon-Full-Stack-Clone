@@ -37,7 +37,7 @@ export const addToBasket = async (token, productId) => {
     
         const data = response.json();
         if (response.ok) {
-            return data;
+            console.log(data.quantity)
         } else {
             throw new Error(data.error || "Failed to add an item to basket")
         } 
@@ -49,5 +49,24 @@ export const addToBasket = async (token, productId) => {
 
 // remove one product from basket
 export const removeFromBasket = async (token, productId) => {
-    
+    try {
+        const response = await fetch(`${backendUrl}/basket`, {
+            method: 'DELETE',
+            headers: {
+                "Content_Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: { productId }
+        })
+        const data = await response.json();
+        console.log(data.quantity)
+        if (response.ok) {
+            console.log(`Successfully remove one product`)
+        } else {
+            throw new Error(data.error || "Failed to add an item to basket")
+        }
+    } catch (error) {
+        console.error("Error adding to basket:", error);
+        throw error;
+    }   
 }

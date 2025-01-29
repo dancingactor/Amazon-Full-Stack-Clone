@@ -2,35 +2,25 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
+import { fetchBasket } from "./basketAPI"
 
-function Login() {
+async function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [, dispatch] = useStateValue();
 
-  const fetchBasket = async (token) => {
-    try {
-      const response = await fetch("http://localhost:5000/basket", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      })
+  const response = await fetchBasket(token);
 
-      if (response.ok) {
-        const basket = await response.json();
-        dispatch({
-          type: "SET_BASKET",
-          basket: basket.items
-        })
-      } else {
-        console.error("Failed to fetch basket")
-      }
-    } catch (error) {
-      console.error("Error fetching basket", error);
-    }
+  if (response.ok) {
+    const basket = await response.json();
+    dispatch({
+      type: "SET_BASKET",
+      basket: basket.items
+    })
+  } else {
+    console.error("Failed to fetch basket")
+  }
   }
 
   // Function to handle login using the Express backend with fetch
@@ -64,7 +54,17 @@ function Login() {
         type: "SET_USER",
         user: user
       })
-      await fetchBasket(token);
+      const res = await fetchBasket(token);
+
+      if (res.ok) {
+        const basket = await res.json();
+        dispatch({
+          type: "SET_BASKET",
+          basket: basket.items
+        })
+      } else {
+        console.error("Failed to fetch basket")
+      }
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
