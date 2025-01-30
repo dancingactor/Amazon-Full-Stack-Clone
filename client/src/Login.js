@@ -4,24 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { fetchBasket } from "./basketAPI"
 
-async function Login() {
+function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [, dispatch] = useStateValue();
-
-  const response = await fetchBasket(token);
-
-  if (response.ok) {
-    const basket = await response.json();
-    dispatch({
-      type: "SET_BASKET",
-      basket: basket.items
-    })
-  } else {
-    console.error("Failed to fetch basket")
-  }
-  }
 
   // Function to handle login using the Express backend with fetch
   const signIn = async (e) => {
@@ -54,17 +41,12 @@ async function Login() {
         type: "SET_USER",
         user: user
       })
-      const res = await fetchBasket(token);
-
-      if (res.ok) {
-        const basket = await res.json();
-        dispatch({
-          type: "SET_BASKET",
-          basket: basket.items
-        })
-      } else {
-        console.error("Failed to fetch basket")
-      }
+      const product_list = await fetchBasket(token);
+      dispatch({
+        type: "SET_BASKET",
+        basket: product_list
+      })
+      
       navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
@@ -103,7 +85,11 @@ async function Login() {
         user: user
       })
 
-      await fetchBasket(token);
+      const product_list = await fetchBasket(token);
+      dispatch({
+        type: "SET_BASKET",
+        basket: product_list
+      })
       // Redirect to the home page after successful registration
       navigate("/");
     } catch (error) {

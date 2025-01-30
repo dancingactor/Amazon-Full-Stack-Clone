@@ -41,12 +41,14 @@ router.get("/", authenticateToken, async (req, res) => {
 router.post("/", authenticateToken, async (req, res) => {
     try {
         const userId = req.user.id;
-        const { productId } = req.body;
+        let { productId } = req.body;
+        productId = parseInt(productId)
 
         const basket = await prisma.basket.findUnique({ where: { userId } });
 
-        let basketItem = await prisma.basketItem.findUnique({
-            where: { baksetId: basket.id, productId }
+        // Using findFirst here instead of findUnique because none of the arguments of 'where' is 'id' field
+        let basketItem = await prisma.basketItem.findFirst({
+            where: { basketId: basket.id, productId }
         })
 
         if (basketItem) {

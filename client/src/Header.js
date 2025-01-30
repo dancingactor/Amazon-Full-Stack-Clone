@@ -14,6 +14,9 @@ function Header() {
       dispatch({
         type: "SET_USER",
         user: null
+      });
+      dispatch({
+        type: "EMPTY_BASKET"
       })
     }
   };
@@ -45,7 +48,7 @@ function Header() {
           </div>
         </Link>
 
-        <Link to="/orders">
+        <Link to={user ? "/orders" : "/login"}>
           <div className="header__option">
             <span className="header__optionLineOne">Returns</span>
             <span className="header__optionLineTwo">& Orders</span>
@@ -58,7 +61,7 @@ function Header() {
           <span className="header__optionLineTwo">Prime</span>
         </div>
 
-        <Link to="/checkout">
+        <Link to={user ? "/checkout" : "/login"}>
           <div className="header__optionBasket">
             <ShoppingCartOutlinedIcon />
             <span className="header__optionLineTwo header__basketCount">

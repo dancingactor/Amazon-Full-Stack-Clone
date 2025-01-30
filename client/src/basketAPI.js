@@ -5,21 +5,29 @@ export const fetchBasket = async (token) => {
       const response = await fetch(`${backendUrl}/basket`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         }
       })
 
       if (response.ok) {
         const basket = await response.json();
-        return basket.items;
+        
+        let product_list = [];
+        for (let item of basket.items) {
+            for (let i = 0; i < item.quantity; i++) {
+                product_list.push(item.product);
+            }
+        }
+        console.log("Product_list: ", product_list);
+        return product_list;
+        
+
       } else {
-        console.error("Failed to fetch basket")
-        return [];
+        throw new Error(`Failed to fetch basket (HTTP ${response.status})`)
       }
     } catch (error) {
-      console.error("Error fetching basket", error);
-      return [];
+        console.error("Error in fetchBasket:", error.message);
+        throw new Error(`Basket fetch failed: ${error.message}`);
     }
   }
 
@@ -27,7 +35,7 @@ export const fetchBasket = async (token) => {
 export const addToBasket = async (token, productId) => {
     try {
         const response = await fetch(`${backendUrl}/basket`, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
