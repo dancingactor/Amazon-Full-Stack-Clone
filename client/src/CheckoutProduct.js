@@ -1,15 +1,18 @@
 import React from 'react';
 import './CheckoutProduct.css';
 import { useStateValue } from './StateProvider';
+import { removeFromBasket } from './basketAPI'
 
 function CheckoutProduct({ id, image, title, price, rating }) {
   const [, dispatch] = useStateValue();
 
-  const removeFromBasket = () => {
+  const handleRemoveButton = async () =>  {
     dispatch({
       type: 'REMOVE_FROM_BASKET',
-      id: id,
+      id,
     });
+    const token = localStorage.getItem('token');
+    await removeFromBasket(token, id);
   };
 
   return (
@@ -28,7 +31,7 @@ function CheckoutProduct({ id, image, title, price, rating }) {
               <p key={i}>⭐</p> // Added key prop
             ))}
         </div>
-        <button onClick={removeFromBasket}>Remove from Basket</button>
+        <button onClick={ handleRemoveButton }>Remove from Basket</button>
 
       </div>
     </div>

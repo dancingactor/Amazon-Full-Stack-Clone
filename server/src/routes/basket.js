@@ -74,7 +74,7 @@ router.delete("/", authenticateToken, async (req, res) => {
         const userId = req.user.id;
         const { productId } = req.body;
         
-        const basketItem = await prisma.basketItem.findUnique({ 
+        const basketItem = await prisma.basketItem.findFirst({ 
             where: {
                 productId: parseInt(productId),
                 basket: { userId } 
@@ -82,14 +82,11 @@ router.delete("/", authenticateToken, async (req, res) => {
         });
 
         if (!basketItem) {
-            return res.json(404).json({ error: "Basket Item not found" });
+            return res.status(404).json({ error: "Basket Item not found" });
         }
         
         const updatedItem = await prisma.basketItem.update({
-            where: {
-                productId: parseInt(productId),
-                basket: { userId } 
-            },
+            where: { id: basketItem.id },
             data: {
                 quantity: { decrement: 1 }
             }
