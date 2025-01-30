@@ -37,6 +37,13 @@ async function main () {
             price: 23.99,
             image: "https://m.media-amazon.com/images/I/71YPc4GGxrL._AC_UX569_.jpg",
             rating: 3
+        },
+        {
+            id: 99238472,
+            title: "yeedi vac x Robot Vacuum - Ultra-Slim Design, Powerful 3000Pa Suction, Carpet Detection, Smart Mapping - Ideal for Carpet, Hard Floor Cleaning, Pets - Alexa Compatible, Wi-Fi Connected",
+            price: 169.98,
+            image: "https://m.media-amazon.com/images/I/61i-GuR9qKS._AC_SX569_.jpg",
+            rating: 4
         }
     ];
     
