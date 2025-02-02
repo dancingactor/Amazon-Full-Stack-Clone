@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - amazon-clone
+name: Build and deploy Full-Stack App to Azure Web App - amazon-clone
 
 on:
   push:
@@ -10,17 +10,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read # required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      - name: Build Client
+        working-directory: client
+        run: |
+          npm install
+          npm run build
+
+      - name: Copy Client Build into Server (Optional)
+        run: |
+          rm -rf server/public || true
+          mkdir -p server/public
+          cp -r client/build/* server/public/
+
+      - name: Build Server
         working-directory: server
         run: |
           npm install
@@ -28,13 +40,14 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        working-directory: server
-        run: zip -r ../release.zip ./*
+        run: |
+          zip -r release.zip server client
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: fullstack-app
           path: release.zip
 
   deploy:
@@ -44,18 +57,18 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # required for requesting the JWT
-      contents: read # required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: fullstack-app
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
