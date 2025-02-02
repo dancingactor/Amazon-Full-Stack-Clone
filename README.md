@@ -72,4 +72,4 @@ Follow these steps to set up and run the project on your local machine:
 
 ## Acknowledgements
 
-This project was developed as a learning exercise inspired by Amazon.
+This project was developed as a learning exercise inspired by Amazon
