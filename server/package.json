@@ -4,8 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "build-client": "cd ../client && npm install && npm run build",
+    "start": "node src/index.js",
+    "postinstall": "npm run build-client",
+    "seed": "node prisma/seed.js",
+    "deploy": "npm run migrate && npm run seed && npm start",
+    "migrate": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
