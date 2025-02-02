@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - amazon-clone
+name: Build and deploy Full-Stack App to Azure Web App - amazon-clone
 
 on:
   push:
@@ -13,28 +13,51 @@ jobs:
       contents: read # required for actions/checkout
 
     steps:
+      # Checkout the entire repository
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
+      # Set up Node.js (for both client and server builds)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and test
+      # Build the client
+      - name: Build Client
+        working-directory: client
+        run: |
+          npm install
+          npm run build
+      # Optionally, if your server serves the client build, you might want to copy the build output
+      # into a folder within the server folder. For example:
+      - name: Copy Client Build into Server (Optional)
+        run: |
+          rm -rf server/public || true
+          mkdir -p server/public
+          cp -r client/build/* server/public/
+      
+      # Build the server
+      - name: Build Server (Optional)
         working-directory: server
         run: |
           npm install
           npm run build --if-present
           npm run test --if-present
 
+      # Package the entire repository or selectively include both folders.
+      # Here, we package the entire repository.
       - name: Zip artifact for deployment
-        working-directory: server
-        run: zip -r ../release.zip ./*
+        run: |
+          # Option 1: Package the entire repository
+          zip -r release.zip ./*
+          # Option 2: Package only the client and server folders (uncomment if you prefer)
+          # zip -r release.zip client server
 
+      # Upload artifact for deployment job
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: fullstack-app
           path: release.zip
 
   deploy:
@@ -44,18 +67,21 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # required for requesting the JWT
-      contents: read # required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
+      # Download the artifact from the build job
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: fullstack-app
 
+      # Unzip the artifact for deployment
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
+
+      # Log in to Azure
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -63,6 +89,7 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_802FB5CB4D3041D39615F525C4194FC8 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CD269466DF2B4C3790D1836619A20E4C }}
 
+      # Deploy to Azure Web App
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
