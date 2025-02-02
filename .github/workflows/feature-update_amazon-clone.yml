@@ -1,3 +1,11 @@
+name: Build and deploy Full-Stack App to Azure Web App - amazon-clone
+
+on:
+  push:
+    branches:
+      - feature-update
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,7 +41,6 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          # Explicitly zip both folders to preserve structure
           zip -r release.zip server client
 
       - name: Upload artifact for deployment job
@@ -64,9 +71,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A26AF517FB374CE0A7BFA9EC055CC0AC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_802FB5CB4D3041D39615F525C4194FC8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CD269466DF2B4C3790D1836619A20E4C }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
