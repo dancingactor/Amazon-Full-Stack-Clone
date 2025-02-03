@@ -21,7 +21,7 @@ app.get('*', (req, res) => {
 });
 
 // Start Server
-const PORT = 8080;
+const PORT = 8080 || process.env.WEBSITES_PORT;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
