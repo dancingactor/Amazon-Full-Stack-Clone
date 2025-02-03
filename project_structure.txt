@@ -1,76 +1,102 @@
-C:.
-│ .env
-│ .firebaserc
-│ .gitignore
-│ firebase.json
-│ package-lock.json
-│ package.json
-│ README.md
-│
-├─.firebase
-│  hosting.YnVpbGQ.cache
-│
 ├─.github
-│ └─workflows
-│     firebase-hosting-merge.yml
-│     firebase-hosting-pull-request.yml
-│
-├─build
-│  index.html
-│
-├─functions
-│  .eslintrc.js
-│  .gitignore
-│  index.js
-│  package-lock.json
-│  package.json
-│  ui-debug.log
-│
-├─images
-│  demo1.png
-│  demo2.png
-│  demo3.png
-│
-├─public
-│  banner1.jpg
-│  banner2.jpg
-│  banner3.jpg
-│  favicon.ico
-│  index.html
-│  logo192.png
-│  logo512.png
-│  manifest.json
-│  robots.txt
-│
-└─src
-   App.css
-   App.js
-   axios.js
-   Checkout.css
-   Checkout.js
-   CheckoutProduct.css
-   CheckoutProduct.js
-   firebase.js
-   Footer.css
-   Footer.js
-   Header.css
-   Header.js
-   Home.css
-   Home.js
-   index.css
-   index.js
-   Login.css
-   Login.js
-   Order.css
-   Order.js
-   Orders.css
-   Orders.js
-   Payment.css
-   Payment.js
-   Product.css
-   Product.js
-   reducer.js
-   reportWebVitals.js
-   StateProvider.js
-   Subtotal.css
-   Subtotal.js
+│   └─workflows
+│       └─feature-update_amazon-clone.yml
+├─client
+│   ├─build
+│   │   ├─static
+│   │   │   ├─css
+│   │   │   │   ├─main.bc58c81a.css
+│   │   │   │   └─main.bc58c81a.css.map
+│   │   │   └─js
+│   │   │       ├─488.bc677cc5.chunk.js
+│   │   │       ├─488.bc677cc5.chunk.js.map
+│   │   │       ├─main.ff41216f.js
+│   │   │       ├─main.ff41216f.js.LICENSE.txt
+│   │   │       └─main.ff41216f.js.map
+│   │   ├─asset-manifest.json
+│   │   ├─banner1.jpg
+│   │   ├─banner2.jpg
+│   │   ├─banner3.jpg
+│   │   ├─favicon.ico
+│   │   ├─index.html
+│   │   ├─logo192.png
+│   │   ├─logo512.png
+│   │   ├─manifest.json
+│   │   └─robots.txt
+│   ├─images
+│   │   ├─demo1.png
+│   │   ├─demo2.png
+│   │   └─demo3.png
+│   ├─public
+│   │   ├─banner1.jpg
+│   │   ├─banner2.jpg
+│   │   ├─banner3.jpg
+│   │   ├─favicon.ico
+│   │   ├─index.html
+│   │   ├─logo192.png
+│   │   ├─logo512.png
+│   │   ├─manifest.json
+│   │   └─robots.txt
+│   ├─src
+│   │   ├─images
+│   │   ├─App.css
+│   │   ├─App.js
+│   │   ├─basketAPI.js
+│   │   ├─Checkout.css
+│   │   ├─Checkout.js
+│   │   ├─CheckoutProduct.css
+│   │   ├─CheckoutProduct.js
+│   │   ├─firebase.js
+│   │   ├─Footer.css
+│   │   ├─Footer.js
+│   │   ├─Header.css
+│   │   ├─Header.js
+│   │   ├─Home.css
+│   │   ├─Home.js
+│   │   ├─index.css
+│   │   ├─index.js
+│   │   ├─Login.css
+│   │   ├─Login.js
+│   │   ├─Order.css
+│   │   ├─Order.js
+│   │   ├─Orders.css
+│   │   ├─Orders.js
+│   │   ├─Payment.css
+│   │   ├─Payment.js
+│   │   ├─Product.css
+│   │   ├─Product.js
+│   │   ├─reducer.js
+│   │   ├─reportWebVitals.js
+│   │   ├─StateProvider.js
+│   │   ├─Subtotal.css
+│   │   └─Subtotal.js
+│   ├─package-lock.json
+│   └─package.json
+├─server
+│   ├─prisma
+│   │   ├─migrations
+│   │   │   ├─20250103184432_init
+│   │   │   │   └─migration.sql
+│   │   │   ├─20250125133037_add_basket_basket_item_product
+│   │   │   │   └─migration.sql
+│   │   │   ├─20250128120315_
+│   │   │   │   └─migration.sql
+│   │   │   ├─20250130081518_
+│   │   │   │   └─migration.sql
+│   │   │   └─migration_lock.toml
+│   │   ├─schema.prisma
+│   │   └─seed.js
+│   ├─src
+│   │   ├─routes
+│   │   │   ├─middleware
+│   │   │   │   └─authenticateToken.js
+│   │   │   ├─auth.js
+│   │   │   └─basket.js
+│   │   └─index.js
+│   ├─.env
+│   ├─.gitignore
+│   ├─package-lock.json
+│   └─package.json
+├─.gitignore
+├─project_structure.txt
+└─README.md
