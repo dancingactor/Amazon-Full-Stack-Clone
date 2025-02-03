@@ -9,10 +9,10 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [, dispatch] = useStateValue();
+  const REACT_APP_BACKEND_URL = "https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net"
 
   // Function to handle login using the Express backend with fetch
   const signIn = async (e) => {
-    const REACT_APP_BACKEND_URL = "https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net"
     e.preventDefault(); // Prevent form refresh
     try {
       // Send a POST request to /auth/login
