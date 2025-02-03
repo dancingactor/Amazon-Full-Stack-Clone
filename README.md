@@ -1,13 +1,13 @@
 # Full-Stack Amazon Clone
 
-This project is a full-stack Amazon clone developed using **React.js**, **Express.js**, **Firebase**, and **Stripe API**. It offers features such as checkout, payment integration, user authentication, and real-time database functionality. The clone is deployed on Firebase Hosting for easy access and testing. 
+This project is a full-stack Amazon clone developed using **React.js**, **Express.js**, **Azure**, **PostgreSQL**, **Prisma ORM**. It offers features such as checkout, payment integration, user authentication, and real-time database functionality. The clone is deployed on **Azure App Service.**
 ## Live Demo
-⮕[https://full-stack-clone-b7681.web.app/](https://full-stack-clone-b7681.web.app/)
+⮕ [https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net/](https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net/)
 
 ![demo1](./images/demo1.png)
 ![demo2](./images/demo2.png)
 ![demo3](./images/demo3.png)
-### Getting Started
+## Getting Started
 
 To set up a testing account:
 
@@ -18,57 +18,22 @@ To set up a testing account:
 
 Thank you for checking out this project! Happy testing!
 
----
 
 ## Technologies Used
 
-- **Frontend**: React.js, React-Dom, React Redux
+- **Frontend**: React.js, React-Dom, React Reducer, Context API
 - **Backend**: Express.js
-- **Database & Hosting**: Firebase Authentication, Firebase Storage, Firestore, Firebase Hosting
-- **Payment**: Stripe API
-
----
-
-## Running the Project Locally
-
-Follow these steps to set up and run the project on your local machine:
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   cd <repository-folder>
-   npm install
-   ```
-
-3. **Firebase Configuration:**
-   - Create a new project on the [Firebase Console](https://console.firebase.google.com/).
-   - Enable Firebase Authentication, Firebase Storage, and Firestore.
-   - Add your Firebase configuration object to the `.env` file.
-
-4. **Stripe API Configuration:**
-   - Sign up on [Stripe](https://stripe.com/) and obtain your API keys.
-   - Add the Stripe API keys to the `.env` file.
-
-5. **Run the Development Server:**
-   ```bash
-   npm start
-   ```
-6. **Access the App:** Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
-
----
+- **Database**: PostgreSQL, Prisma ORM
+- **Hosting**: Azure, GitHub Actions
 
 ## Features
 
-- **Authentication**: Register and login with Firebase Authentication.
-- **Product Management**: Add items to the cart, view details, and remove items.
-- **Checkout & Payment**: Process secure payments through Stripe API.
-- **User-Friendly Interface**: Clean, Amazon-inspired UI.
+- **JWT Authentication**: Secure login and session management using JSON Web Tokens.
+- **Product Management**: Add items to the cart, and remove them.
+- **User Persistence**: The app remembers users by saving their basket items. When users log back in, their basket is automatically restored.
+- **Checkout & Payment**: Simulate payments process
 
----
+
 
 ## Acknowledgements
 

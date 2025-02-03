@@ -23,10 +23,6 @@
 │   │   ├─logo512.png
 │   │   ├─manifest.json
 │   │   └─robots.txt
-│   ├─images
-│   │   ├─demo1.png
-│   │   ├─demo2.png
-│   │   └─demo3.png
 │   ├─public
 │   │   ├─banner1.jpg
 │   │   ├─banner2.jpg
@@ -46,7 +42,6 @@
 │   │   ├─Checkout.js
 │   │   ├─CheckoutProduct.css
 │   │   ├─CheckoutProduct.js
-│   │   ├─firebase.js
 │   │   ├─Footer.css
 │   │   ├─Footer.js
 │   │   ├─Header.css
@@ -72,6 +67,10 @@
 │   │   └─Subtotal.js
 │   ├─package-lock.json
 │   └─package.json
+├─images
+│   ├─demo1.png
+│   ├─demo2.png
+│   └─demo3.png
 ├─server
 │   ├─prisma
 │   │   ├─migrations
@@ -98,5 +97,6 @@
 │   ├─package-lock.json
 │   └─package.json
 ├─.gitignore
+├─path_script.ps1
 ├─project_structure.txt
 └─README.md
