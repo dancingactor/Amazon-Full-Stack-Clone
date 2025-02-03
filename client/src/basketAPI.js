@@ -1,4 +1,4 @@
-const backendUrl = "http://localhost:5000" || process.env.REACT_APP_BACKEND_URL;
+const backendUrl = "https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net"
 
 export const fetchBasket = async (token) => {
     try {

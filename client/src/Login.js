@@ -12,10 +12,11 @@ function Login() {
 
   // Function to handle login using the Express backend with fetch
   const signIn = async (e) => {
+    const REACT_APP_BACKEND_URL = "https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net"
     e.preventDefault(); // Prevent form refresh
     try {
       // Send a POST request to /auth/login
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/login` || "http://localhost:8080/auth/login", {
+      const response = await fetch(`${REACT_APP_BACKEND_URL}/auth/login` || "http://localhost:8080/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +60,7 @@ function Login() {
     e.preventDefault(); // Prevent form refresh
     try {
       // Send a POST request to /auth/register
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/auth/register`  || "http://localhost:8080/auth/register", {
+      const response = await fetch(`${REACT_APP_BACKEND_URL}/auth/register`  || "http://localhost:8080/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
