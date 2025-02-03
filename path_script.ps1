@@ -32,4 +32,4 @@ function Show-Tree {
 }
 
 # Example usage:
-Show-Tree -Path "C:\Users\s9903\OneDrive\Desktop\React-Amazon-Clone"
+Show-Tree -Path "C:\Users\s9903\Downloads\node-app.zip"
