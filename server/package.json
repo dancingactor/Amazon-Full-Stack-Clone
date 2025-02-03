@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "seed": "node prisma/seed.js",
     "deploy": "npm run migrate && npm run seed && npm start",
-    "migrate": "prisma migrate deploy",
+    "migrate": "prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
