@@ -78,4 +78,3 @@ jobs:
           app-name: 'amazon-clone'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AA68C447EE69489E896708ADD6B12CFF }}
