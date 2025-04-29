@@ -1,8 +1,7 @@
 # Full-Stack Amazon Clone
 
 This project is a full-stack Amazon clone developed using **React.js**, **Express.js**, **Azure**, **PostgreSQL**, **Prisma ORM**. It offers features such as checkout, payment integration, user authentication, and real-time database functionality. The clone is deployed on **Azure App Service.**
-## Live Demo
-⮕ [https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net/](https://amazon-clone-cjffgkhdh9cxanaj.japanwest-01.azurewebsites.net/)
+## Demo
 
 ![demo1](./images/demo1.png)
 ![demo2](./images/demo2.png)
